@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: cloudConsumer
+server:
+  port: 8096
+  servlet:
+    context-path: /consumer
+  tomcat:
+    uri-encoding: UTF-8
+management:
+  endpoints:
+    web:
+      exposure:
+        include: env, beans, info, configprops, metrics, health, shutdown
+  endpoint:
+    shutdown:
+      enabled: true
+
+info.app.name: cloudConsumer
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer1:8084/eureka, http://peer2:8084/eureka, http://localhost:8081/eureka
