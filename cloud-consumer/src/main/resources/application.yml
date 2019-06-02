@@ -20,4 +20,8 @@ info.app.name: cloudConsumer
 eureka:
   client:
     service-url:
-      defaultZone: http://peer1:8084/eureka, http://peer2:8084/eureka, http://localhost:8081/eureka
+      defaultZone: http://localhost:8081/eureka, http://peer1:8084/eureka, http://peer2:8084/eureka
+hystrix:
+  metrics:
+    polling-interval-ms: 2000
+

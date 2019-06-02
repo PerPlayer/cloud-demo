@@ -2,7 +2,7 @@ spring:
   application:
     name: cloudProducer
 server:
-  port: 8090
+  port: 8091
   servlet:
     context-path: /producer
   tomcat:

@@ -130,6 +130,28 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.10.2</version>
 		</dependency>
+
+		<!--jdk9以上要引入以下包,否则抛: NoClassDefFoundError: javax/xml/bind/ValidationException-->
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-core</artifactId>
+			<version>2.3.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.activation</groupId>
+			<artifactId>activation</artifactId>
+			<version>1.1.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -142,7 +164,7 @@
 				<!--</configuration>-->
 			</plugin>
 		</plugins>
-		<finalName>cloudserver</finalName>
+		<!--<finalName>cloudserver</finalName>-->
 	</build>
 
 	<repositories>

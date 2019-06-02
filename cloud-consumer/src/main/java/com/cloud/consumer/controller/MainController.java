@@ -1,6 +1,7 @@
 package com.cloud.consumer.controller;
 
 
+import com.cloud.consumer.service.MainService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +19,10 @@ public class MainController {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private RestTemplate template;
+    private MainService mainService;
 
     @RequestMapping("/hello")
     public String index(){
-        String body = template.getForEntity("http://cloudproducer/hello", String.class).getBody();
-        return "Hi, Consumer: " + body;
+        return mainService.hello();
     }
 }
