@@ -24,24 +24,4 @@ eureka:
 hystrix:
   metrics:
     polling-interval-ms: 2000
-#  command:
-#    default:
-#      execution:
-#        isolation:
-#          thread:
-#            timoutInMillliseconds: 10000
-
-#ribbon:
-#  ConnectTimeout: 2000
-#  ReadTimeout: 5000
-#CLOUDPRODUCER:
-#  ribbon:
-#    ConnectTimeout: 1000
-#    ReadTimeout: 1000
-#    OkToRetryOnAllOperations: false
-#    MaxAutoRetriesNextServer: 1
-#    MaxAutoRetries: 1
-#feign:
-#  hystrix:
-#    enabled: false
 

@@ -37,6 +37,15 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-hystrix</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-feign</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.cloud.perplayer</groupId>
+			<artifactId>cloud-feign-api</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 
    </project>
