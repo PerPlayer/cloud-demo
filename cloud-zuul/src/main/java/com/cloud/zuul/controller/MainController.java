@@ -1,4 +1,4 @@
-package com.cloud.server.controller;
+package com.cloud.zuul.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +9,6 @@ public class MainController {
 
     @RequestMapping("/hello")
     public String hello() {
-        return "hi, server";
+        return "hi, zuul";
     }
 }

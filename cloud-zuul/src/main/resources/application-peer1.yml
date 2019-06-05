@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: cloudServer
+server:
+  port: 8082
+eureka:
+  client:
+    service-url:
+      defaultZone: http://peer2:8084/eureka
+  instance:
+    hostname: peer1
+
+

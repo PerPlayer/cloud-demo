@@ -13,6 +13,7 @@
 		<module>cloud-server</module>
 		<module>cloud-producer</module>
 		<module>cloud-consumer</module>
+		<module>cloud-zuul</module>
 		<module>cloud-feign-api</module>
 	</modules>
 

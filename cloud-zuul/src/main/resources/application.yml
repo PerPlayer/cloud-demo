@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: cloudZuul
+server:
+  port: 80
+  servlet:
+    context-path: /zuul
+info.app.name: cloudZuul
+
+zuul:
+  routes:
+    consumer:
+      path: /consumer/**
+      url: CLOUDCONSUMER
+    producer:
+      path: /producer/**
+      url: CLOUDPRODUCER
+    server:
+      path: /server/**
+      url: http://localhost:8081/
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
+
+#传统多实例配置
+#zuul:
+#  routes:
+#    consumer:
+#      path: /consumer/**
+#      url: CLOUDCONSUMER
+#ribbon:
+#  eureka:
+#    enabled: false
+#CLOUDCONSUMER:
+#  ribbon:
+#    listOfServers: http://localhost:8080/, http://localhost:8081/
