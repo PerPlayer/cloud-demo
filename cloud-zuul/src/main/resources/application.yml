@@ -18,6 +18,9 @@ zuul:
     server:
       path: /server/**
       url: http://localhost:8081/
+    eureka:
+      path: /eureka/**
+      url: http://localhost:8081/eureka/
 
 eureka:
   client:

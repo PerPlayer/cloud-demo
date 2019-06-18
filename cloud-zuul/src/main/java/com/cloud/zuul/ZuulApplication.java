@@ -20,11 +20,10 @@ import javax.servlet.annotation.WebServlet;
 public class ZuulApplication {
 
     public static void main(String[] args) {
-//        SpringApplication.run(ZuulApplication.class, args);
-        new SpringApplicationBuilder(ZuulApplication.class).web(true).run();
+        SpringApplication.run(ZuulApplication.class, args);
     }
 
-    @Bean
+//    @Bean
     public AccessFilter accessFilter(){
         return new AccessFilter();
     }
