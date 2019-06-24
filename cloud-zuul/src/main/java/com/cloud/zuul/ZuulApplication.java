@@ -26,7 +26,7 @@ public class ZuulApplication {
         SpringApplication.run(ZuulApplication.class, args);
     }
 
-    @Bean
+//    @Bean
     public AccessFilter accessFilter(){
         return new AccessFilter();
     }

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: cloudConfig
+  cloud:
+    config:
+      server:
+        git:
+          uri: file://E://GitHub/cloud-demo/cloud-config
+          search-paths: /src/main/resources
+      uri: http://localhost:8000
+server:
+  port: 8000
+
+
+
+
