@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    config:
+      uri: http://www.gateway.cc/config
+      name: cloud-consumer
+      profile: ${config.profile:dev}

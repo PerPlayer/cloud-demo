@@ -1,6 +1,6 @@
 spring:
   application:
-    name: cloudServer
+    name: cloud-server
 server:
   port: 8084
 eureka:

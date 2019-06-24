@@ -22,7 +22,7 @@ public class MainServiceImpl implements MainService{
     @HystrixCommand(fallbackMethod = "callback")
     @Override
     public String hello() {
-        String body = template.getForEntity("http://cloudproducer/hello?name=xm", String.class).getBody();
+        String body = template.getForEntity("http://cloud-producer/hello?name=xm", String.class).getBody();
         return "Hi, Consumer: " + body;
     }
 

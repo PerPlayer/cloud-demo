@@ -1,12 +1,12 @@
 spring:
   application:
-    name: cloudConfig
+    name: cloud-config
   cloud:
     config:
       server:
         git:
-          uri: file://E://GitHub/cloud-demo/cloud-config
-          search-paths: /src/main/resources
+          uri: file://E://GitHub/cloud-demo
+          search-paths: cloud-config/src/main/resources
       uri: http://localhost:8000
 server:
   port: 8000
