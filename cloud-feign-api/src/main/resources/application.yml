@@ -20,7 +20,7 @@ info.app.name: cloud-feign-api
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8081/eureka, http://peer1:8084/eureka, http://peer2:8084/eureka
+      defaultZone: http://www.gateway.cc/server/eureka
 hystrix:
   metrics:
     polling-interval-ms: 2000

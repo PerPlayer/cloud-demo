@@ -2,5 +2,5 @@ spring:
   cloud:
     config:
       uri: http://www.gateway.cc:8000
-      name: cloud-server
+      name: cloud-zuul
       profile: ${config.profile:dev}

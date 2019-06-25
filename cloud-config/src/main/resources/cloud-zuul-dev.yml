@@ -11,7 +11,7 @@ zuul:
   routes:
     config:
       path: /config/**
-      url: cloud-config
+      url: http://www.gateway.cc:8000
     consumer:
       path: /consumer/**
       url: cloud-consumer
@@ -20,15 +20,15 @@ zuul:
       url: cloud-producer
     server:
       path: /server/**
-      url: http://localhost:8081/
+      url: http://www.gateway.cc:8081/
     eureka:
       path: /eureka/**
-      url: http://localhost:8081/eureka/
+      url: http://www.gateway.cc:8081/eureka/
 
 eureka:
   client:
     service-url:
-      defaultZone: http://www.gateway.cc/server/eureka
+      defaultZone: http://www.gateway.cc:8081//eureka
 
 #传统多实例配置
 #zuul:

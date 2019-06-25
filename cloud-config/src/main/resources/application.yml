@@ -7,7 +7,7 @@ spring:
         git:
           uri: file://E://GitHub/cloud-demo
           search-paths: cloud-config/src/main/resources
-      uri: http://localhost:8000
+      uri: http://www.gateway.cc:8000
 server:
   port: 8000
 
