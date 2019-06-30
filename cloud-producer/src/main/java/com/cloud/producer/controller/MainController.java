@@ -24,6 +24,6 @@ public class MainController {
     public String index(@RequestParam String name){
         ServiceInstance instance = client.getLocalServiceInstance();
         logger.info("host: {}, ip: {}", instance.getHost(), instance.getServiceId());
-        return "Hi, Producer with: " + name;
+        return "Feign response: " + name;
     }
 }

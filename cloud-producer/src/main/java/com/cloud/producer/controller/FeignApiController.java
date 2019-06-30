@@ -33,6 +33,6 @@ public class FeignApiController implements FeignApi {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Hi, Feign Api Producer with: " + name;
+        return "Feign api response: " + name;
     }
 }

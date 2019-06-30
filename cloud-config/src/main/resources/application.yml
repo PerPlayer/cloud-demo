@@ -5,7 +5,8 @@ spring:
     config:
       server:
         git:
-          uri: file://E://GitHub/cloud-demo
+#          uri: file://E://GitHub/cloud-demo
+          uri: https://github.com/PerPlayer/cloud-demo.git
           search-paths: cloud-config/src/main/resources
       uri: http://www.gateway.cc:8000
 server:
