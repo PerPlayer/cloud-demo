@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cloud.producer.dao.TableDao">
+
+    <select id="queryTableList" resultType="map">
+        select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables
+        where table_schema = (select database())
+        <if test="tableName != null and tableName.trim() != ''">
+            and table_name like concat('%', #{tableName}, '%')
+        </if>
+        order by create_time desc
+    </select>
+
+    <select id="queryTable" resultType="map">
+        select table_name tableName, engine, table_comment tableComment, create_time createTime from information_schema.tables
+        where table_schema = (select database()) and table_name = #{tableName}
+    </select>
+
+    <select id="queryColumns" resultType="map">
+        select column_name columnName, data_type dataType, column_comment columnComment, column_key columnKey, extra from information_schema.columns
+        where table_name = #{tableName} and table_schema = (select database()) order by ordinal_position
+    </select>
+
+    <!-- 公用字段
+    <resultMap id="baseMap" type="com.crawler.crawler.model.Entry">
+        <id property="id" column="id"/>
+        <result property="createTime"   column="create_time"/>
+        <result property="modifyTime"   column="modify_time"/>
+        <result property="status"   column="status"/>
+    </resultMap>
+
+    <resultMap id="elementResultMap" type="com.crawler.crawler.model.Entry" extends="baseMap">
+        <result property="title"   column="title"/>
+        <result property="content"   column="content"/>
+        <result property="taskId"   column="task_id"/>
+        <result property="weight"   column="weight"/>
+    </resultMap>
+
+    <sql id="selectBlock">
+        c.id AS id,
+        c.title AS title,
+        c.content AS content,
+        c.create_time AS createTime,
+        c.modify_time AS modifyTime,
+        c.status AS status
+    </sql>
+
+    <update id="update">
+        update entry set ${column} = #{value} where id = #{id}
+    </update>
+-->
+    <!--
+        <insert id="insert" parameterType="commentEntity" useGeneratedKeys="true">
+            INSERT INTO
+              comment(
+                title,
+                comment,
+                page_id,
+                create_time,
+                update_time,
+                is_enable)
+            VALUES (
+                #{title},
+                #{comment},
+                #{pageId},
+                now(),
+                now(),
+                1)
+        </insert>
+
+        <select id="queryById" parameterType="long" resultMap="commentResultMap">
+            select
+            <include refid="selectBlock"/>
+            from
+            comment c
+            where id = #{id}
+        </select>
+
+        <select id="queryByPageId" parameterType="long" resultMap="commentResultMap">
+            select
+            <include refid="selectBlock"/>
+            from
+            comment c
+            where page_id = #{id}
+        </select>
+
+        <select id="queryAll" resultMap="commentResultMap">
+            SELECT
+                <include refid="selectBlock"/>
+            FROM
+              comment c
+        </select>
+    -->
+
+</mapper>

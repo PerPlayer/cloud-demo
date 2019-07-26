@@ -1,12 +1,19 @@
 spring:
   application:
     name: cloud-producer
+  datasource:
+    type: org.apache.commons.dbcp.BasicDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8
+    username: root
+    password: tiger
 server:
   port: 8090
   servlet:
     context-path: /producer
   tomcat:
     uri-encoding: UTF-8
+
 management:
   endpoints:
     web:

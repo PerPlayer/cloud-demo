@@ -1,0 +1,21 @@
+package ${packagePath};
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+
+@Entity(name = "${tableName}")
+@Data
+@NoArgsConstructor
+public class ${entryName} {
+
+#foreach($column in $columns)
+    $!{column.key}
+    @Column(name = "${column.columnName}"#if(${column.length}!=0), length = ${column.length} #end)
+    private ${column.type} ${column.fieldName};
+#end
+
+}
