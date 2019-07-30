@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="${packagePath}.dao.${entityName}Dao">
+
+    <resultMap id="resultMap" type="${packagePath}.entity.${entityName}Entity">
+#foreach(${column} in $columns)
+#if(${column.key})
+        <id property="${column.fieldName}" column="${column.columnName}"/>
+#else
+        <result property="${column.fieldName}" column="${column.columnName}"/>
+#end
+#end
+    </resultMap>
+
+    <sql id="selectBlock">
+#foreach(${column} in $columns)
+#if(${velocityCount}!=$columns.size())
+        t.${column.columnName} AS ${column.fieldName},
+#else
+        t.${column.columnName} AS ${column.fieldName}
+#end
+#end
+    </sql>
+
+    <insert id="save" parameterType="${packagePath}.entity.${entityName}Entity" useGeneratedKeys="true">
+        INSERT INTO
+            ${tableName}(
+#foreach(${column} in $columns)
+#if(${velocityCount}!=$columns.size())
+                ${column.columnName},
+#else
+                ${column.columnName}
+#end
+#end
+            )
+        VALUES (
+#foreach(${column} in $columns)
+#if(${velocityCount}!=$columns.size())
+                #{${column.fieldName}},
+#else
+                #{${column.fieldName}}
+#end
+#end
+            )
+    </insert>
+
+    <update id="update">
+        update ${tableName} set \${column} = #{value} where id = #{id}
+    </update>
+
+    <update id="delete">
+        delete from ${tableName} where id = #{id}
+    </update>
+
+    <select id="queryById" parameterType="String" resultMap="resultMap">
+        select
+        <include refid="selectBlock"/>
+        from
+        ${tableName} t
+        where id = #{id}
+    </select>
+
+    <select id="queryAll" resultMap="resultMap">
+        SELECT
+            <include refid="selectBlock"/>
+        FROM
+        ${tableName} t
+    </select>
+
+</mapper>

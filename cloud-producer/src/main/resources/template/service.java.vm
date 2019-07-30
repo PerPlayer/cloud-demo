@@ -1,0 +1,19 @@
+package ${packagePath}.service;
+
+import ${packagePath}.entity.${entityName}Entity;
+import ${packagePath}.model.${entityName}Model;
+
+import java.util.List;
+
+public interface ${entityName}Service {
+
+    ${entityName}Model save(${entityName}Model model);
+
+    int update(String id, String column, Object value);
+
+    int delete(String id);
+
+    List<${entityName}Model> queryAll();
+
+    ${entityName}Model queryById(String id);
+}

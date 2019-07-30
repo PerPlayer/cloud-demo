@@ -1,0 +1,16 @@
+package ${packagePath}.model;
+
+import lombok.Data;
+
+import java.util.Date;
+
+@Data
+public class ${entityName}Model {
+
+#foreach($column in $columns)
+    /** $!{column.comment} */
+    private ${column.type} ${column.fieldName};
+
+#end
+
+}

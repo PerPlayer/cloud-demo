@@ -1,0 +1,21 @@
+package ${packagePath}.dao;
+
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
+import ${packagePath}.entity.${entityName}Entity;
+
+import java.util.List;
+
+@Repository
+public interface ${entityName}Dao {
+
+    int save(${entityName}Entity entity);
+
+    int update(@Param("id") String id, @Param("column") String column, @Param("value") Object value);
+
+    int delete(String id);
+
+    List<${entityName}Entity> queryAll();
+
+    ${entityName}Entity queryById(String id);
+}
