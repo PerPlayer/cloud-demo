@@ -1,4 +1,4 @@
-package ${packagePath};
+package ${packagePath}.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +10,13 @@ import java.util.Date;
 @Entity(name = "${tableName}")
 @Data
 @NoArgsConstructor
-public class ${entryName} {
-
+public class ${entityName}Entity {
 #foreach($column in $columns)
-    $!{column.key}
+
+    /** $!{column.comment} */
+#if(${column.key})
+    ${column.key}
+#end
     @Column(name = "${column.columnName}"#if(${column.length}!=0), length = ${column.length} #end)
     private ${column.type} ${column.fieldName};
 #end
