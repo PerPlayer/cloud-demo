@@ -1,6 +1,8 @@
 package com.cloud.producer.config;
 
+import com.github.pagehelper.PageInterceptor;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.ibatis.plugin.Interceptor;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -38,6 +40,8 @@ public class DataSourceConfig {
         Resource[] resources = resourceResolver.getResources("mapper/*.xml");
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
+        PageInterceptor pageInterceptor = new PageInterceptor();
+        factoryBean.setPlugins(new Interceptor[]{pageInterceptor});
 //        factoryBean.setConfigLocation(new ClassPathResource("conf/mybatis-config.xml"));
         factoryBean.setMapperLocations(resources);
         return factoryBean;

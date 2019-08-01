@@ -6,6 +6,8 @@ import com.cloud.producer.codegenerator.entity.ColumnType;
 import com.cloud.producer.codegenerator.entity.TableEntity;
 import com.cloud.producer.codegenerator.entity.columntype.Type;
 import com.cloud.producer.dao.TableDao;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import com.google.common.collect.Lists;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -29,6 +31,12 @@ public class GenerateService {
 
     String tableData = "[{\"createTime\":1551851882000,\"engine\":\"MyISAM\",\"tableComment\":\"\",\"tableName\":\"crawler_entry\"}]\n";
     String columnsData = "[{\"columnComment\":\"\",\"columnKey\":\"PRI\",\"columnName\":\"id\",\"dataType\":\"varchar\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"create_time\",\"dataType\":\"datetime\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"modify_time\",\"dataType\":\"datetime\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"status\",\"dataType\":\"int\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"version\",\"dataType\":\"int\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"content\",\"dataType\":\"mediumtext\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"task_id\",\"dataType\":\"varchar\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"title\",\"dataType\":\"varchar\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"weight\",\"dataType\":\"int\",\"extra\":\"\"}]\n";
+
+    public void queryTable(String tableName){
+        Page<Object> page = PageHelper.startPage(1, 10, true);
+        tableDao.queryTable(tableName);
+        System.out.println(page.getResult());
+    }
 
     public byte[] generate(String tableName){
 
