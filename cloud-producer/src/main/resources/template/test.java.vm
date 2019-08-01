@@ -1,0 +1,27 @@
+import ${packagePath}.ProducerApplication;
+import ${packagePath}.model.${entityName}Model;
+import ${packagePath}.service.${entityName}Service;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
+import java.util.List;
+import java.util.stream.IntStream;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = ProducerApplication.class)
+public class ${entityName}Test {
+
+    @Autowired
+    private ${entityName}Service service;
+
+    @Test
+    public void test() {
+        List<${entityName}Model> models = service.queryAll();
+        IntStream.range(0, models.size()>10?10:models.size()).forEach(index -> {
+            System.out.println(models.get(index));
+        });
+    }
+}
