@@ -16,4 +16,5 @@ public class ColumnEntity {
     private int length;
 
     private String key;
+
 }

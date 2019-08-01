@@ -1,7 +1,10 @@
 package com.cloud.producer.codegenerator;
 
+import com.alibaba.fastjson.JSON;
 import com.cloud.producer.codegenerator.entity.ColumnEntity;
+import com.cloud.producer.codegenerator.entity.ColumnType;
 import com.cloud.producer.codegenerator.entity.TableEntity;
+import com.cloud.producer.codegenerator.entity.columntype.Type;
 import com.cloud.producer.dao.TableDao;
 import com.google.common.collect.Lists;
 import org.apache.velocity.Template;
@@ -24,28 +27,34 @@ public class GenerateService {
     private TableDao tableDao;
     String packagePath = "com.cloud.producer";
 
+    String tableData = "[{\"createTime\":1551851882000,\"engine\":\"MyISAM\",\"tableComment\":\"\",\"tableName\":\"crawler_entry\"}]\n";
+    String columnsData = "[{\"columnComment\":\"\",\"columnKey\":\"PRI\",\"columnName\":\"id\",\"dataType\":\"varchar\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"create_time\",\"dataType\":\"datetime\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"modify_time\",\"dataType\":\"datetime\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"status\",\"dataType\":\"int\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"version\",\"dataType\":\"int\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"content\",\"dataType\":\"mediumtext\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"task_id\",\"dataType\":\"varchar\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"title\",\"dataType\":\"varchar\",\"extra\":\"\"},{\"columnComment\":\"\",\"columnKey\":\"\",\"columnName\":\"weight\",\"dataType\":\"int\",\"extra\":\"\"}]\n";
+
     public byte[] generate(String tableName){
 
         List<String> templates = getTemplates();
-        List<Map<String, Object>> tables = Lists.newArrayList(tableDao.queryTable(tableName));//tableDao.queryTableList(tableName);
+        List<Map<String, Object>> tables = Lists.newArrayList(tableDao.queryTable(tableName));
         tables.forEach(table->{
-            TableEntity tableEntry = new TableEntity();
-            tableEntry.setPackagePath(packagePath);
-            tableEntry.setTableName((String)table.get("tableName"));
-            tableEntry.setEntityName(getEntityName((String)table.get("tableName")));
-            tableEntry.setComment((String)table.get("tableComment"));
-            List<Map<String, Object>> columns = tableDao.queryColumns(tableEntry.getTableName());
+            TableEntity tableEntity = new TableEntity();
+            tableEntity.setPackagePath(packagePath);
+            tableEntity.setTableName((String)table.get("tableName"));
+            tableEntity.setEntityName(getEntityName((String)table.get("tableName")));
+            tableEntity.setComment((String)table.get("tableComment"));
+            List<Map<String, Object>> columns = tableDao.queryColumns(tableEntity.getTableName());
+
+            System.out.println(JSON.toJSONString(tables));
+            System.out.println(JSON.toJSONString(columns));
 
             ArrayList<ColumnEntity> columnEntries = Lists.<ColumnEntity>newArrayList();
             columns.forEach(map->{
                 columnEntries.add(convertColumn(map));
             });
-            tableEntry.setColumns(columnEntries);
+            tableEntity.setColumns(columnEntries);
 
             templates.forEach(templateName->{
                 //目标内容
-                String content = mergeTemplate(tableEntry, templateName);
-                createFile(tableEntry, templateName, content);
+                String content = mergeTemplate(tableEntity, templateName);
+                createFile(tableEntity, templateName, content);
             });
 
         });
@@ -79,15 +88,23 @@ public class GenerateService {
 
     private String prepareDirectory(String lastNode) {
         StringBuilder pathBuilder = new StringBuilder();
-        if ("mapper".equals(lastNode)) {
-            pathBuilder.append("src/main/resources/mapper/");
-        }else{
-            pathBuilder.append("src/main/java/");
-            pathBuilder.append(packagePath.replaceAll("\\.", "/")).append("/");
-            if (lastNode.equals("impl")) {
-                pathBuilder.append("service/");
+        switch (lastNode) {
+            case "mapper":{
+                pathBuilder.append("src/main/resources/mapper/");
             }
-            pathBuilder.append(lastNode).append("/");
+            break;
+            case "test":{
+                pathBuilder.append("src/test/java/");
+            }
+            break;
+            default:{
+                pathBuilder.append("src/main/java/");
+                pathBuilder.append(packagePath.replaceAll("\\.", "/")).append("/");
+                if (lastNode.equals("impl")) {
+                    pathBuilder.append("service/");
+                }
+                pathBuilder.append(lastNode).append("/");
+            }
         }
         String path = pathBuilder.toString();
         File dir = new File(path);
@@ -99,7 +116,7 @@ public class GenerateService {
 
     private String mergeTemplate(TableEntity tableEntry, String templateName) {
         VelocityContext velocityContext = new VelocityContext(tableEntry);
-        Template template = Velocity.getTemplate("src/main/resources/template/" + templateName);
+        Template template = Velocity.getTemplate("src/main/resources/template/" + templateName, "UTF-8");
         StringWriter writer = new StringWriter();
         template.merge(velocityContext, writer);
         String content = writer.toString();
@@ -115,10 +132,12 @@ public class GenerateService {
         ArrayList<String> templates = Lists.newArrayList();
         templates.add("entity.java.vm");
         templates.add("model.java.vm");
+        templates.add("mapper.xml.vm");
         templates.add("dao.java.vm");
         templates.add("service.java.vm");
         templates.add("impl.java.vm");
-        templates.add("mapper.xml.vm");
+        templates.add("test.java.vm");
+        templates.add("controller.java.vm");
         return templates;
     }
 
@@ -128,23 +147,13 @@ public class GenerateService {
      * @return
      */
     private ColumnEntity convertColumn(Map<String, Object> columnMap) {
-        ColumnEntity columnEntry = new ColumnEntity();
-        if ("PRI".equals(columnMap.get("columnKey"))) {
-            columnEntry.setKey("@Id");
-            columnEntry.setType("String");
-            columnEntry.setLength(32);
-        } else if ("int".equals(columnMap.get("dataType"))) {
-            columnEntry.setType("int");
-            columnEntry.setLength(4);
-        } else if (Lists.newArrayList("mediumtext", "varchar").contains(columnMap.get("dataType"))) {
-            columnEntry.setType("String");
-        } else if ("datetime".equals(columnMap.get("dataType"))) {
-            columnEntry.setType("Date");
-        }
-        columnEntry.setComment((String)columnMap.get("columnComment"));
-        columnEntry.setColumnName((String)columnMap.get("columnName"));
-        columnEntry.setFieldName(getFiledName((String)columnMap.get("columnName")));
-        return columnEntry;
+        ColumnEntity columnEntity = new ColumnEntity();
+        //适配列
+        Type.init(columnMap).eval().fileEntity(columnEntity);
+        columnEntity.setComment((String)columnMap.get("columnComment"));
+        columnEntity.setColumnName((String)columnMap.get("columnName"));
+        columnEntity.setFieldName(getFiledName((String)columnMap.get("columnName")));
+        return columnEntity;
     }
 
     /**

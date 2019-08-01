@@ -1,10 +1,12 @@
 package ${packagePath}.model;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.util.Date;
 
 @Data
+@ToString
 public class ${entityName}Model {
 
 #foreach($column in $columns)

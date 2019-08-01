@@ -18,9 +18,9 @@
     <sql id="selectBlock">
 #foreach(${column} in $columns)
 #if(${velocityCount}!=$columns.size())
-        t.${column.columnName} AS ${column.fieldName},
+        t.${column.columnName} AS ${column.columnName},
 #else
-        t.${column.columnName} AS ${column.fieldName}
+        t.${column.columnName} AS ${column.columnName}
 #end
 #end
     </sql>

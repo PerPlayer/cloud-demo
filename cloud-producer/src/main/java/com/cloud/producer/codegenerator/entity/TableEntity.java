@@ -15,6 +15,8 @@ public class TableEntity implements Context {
 
     private String entityName;
 
+    private String entityContext;
+
     private String comment;
 
     private List<ColumnEntity> columns;
@@ -60,5 +62,9 @@ public class TableEntity implements Context {
     @Override
     public Object remove(Object key) {
         return null;
+    }
+
+    public String getEntityContext(){
+        return getEntityName().toLowerCase();
     }
 }
