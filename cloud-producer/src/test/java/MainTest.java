@@ -12,8 +12,6 @@ public class MainTest {
 
     public static void main(String[] args) {
 
-        new GenerateService().generate(null);
-
         System.exit(0);
         System.out.println(UUID.fromString("a1a4a1b7-f06d-4e4c-8d55-5742b94528ed").toString());
     }

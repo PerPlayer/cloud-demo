@@ -31,6 +31,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!--<tomcat.version>8</tomcat.version>-->
 		<boot.version>1.5.8.RELEASE</boot.version>
+		<commons.io.version>2.5</commons.io.version>
 	</properties>
 
 	<dependencyManagement>
@@ -46,6 +47,12 @@
 	</dependencyManagement>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>

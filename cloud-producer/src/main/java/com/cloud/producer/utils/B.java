@@ -1,13 +1,18 @@
 package com.cloud.producer.utils;
 
+import lombok.Data;
+
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * 返回数据
  */
-public class B extends HashMap<String, Object> {
+@Data
+public class B<T> extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
+
+	private PPage<T> page;
 
 	public B() {
 		put("code", 0);
@@ -48,6 +53,11 @@ public class B extends HashMap<String, Object> {
 	@Override
 	public B put(String key, Object value) {
 		super.put(key, value);
+		return this;
+	}
+
+	public B setPage(PPage<T> page) {
+		this.page = page;
 		return this;
 	}
 }

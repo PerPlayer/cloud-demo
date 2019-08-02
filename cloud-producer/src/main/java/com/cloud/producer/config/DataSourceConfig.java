@@ -40,8 +40,6 @@ public class DataSourceConfig {
         Resource[] resources = resourceResolver.getResources("mapper/*.xml");
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
-        PageInterceptor pageInterceptor = new PageInterceptor();
-        factoryBean.setPlugins(new Interceptor[]{pageInterceptor});
 //        factoryBean.setConfigLocation(new ClassPathResource("conf/mybatis-config.xml"));
         factoryBean.setMapperLocations(resources);
         return factoryBean;

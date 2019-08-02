@@ -1,5 +1,6 @@
 import com.cloud.producer.ProducerApplication;
 import com.cloud.producer.codegenerator.GenerateService;
+import com.cloud.producer.utils.PPage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,11 @@ public class SpringTest {
     private GenerateService generateService;
 
     @Test
-    public void generateTest(){
+    public void generateTest() throws Exception{
 
 
-        generateService.queryTable("crawler");
-//        generateService.generate("crawler_log");
+        PPage pg = new PPage();
+//        generateService.queryTableList("crawler", pg);
+        generateService.generateCode("crawler_log");
     }
 }
