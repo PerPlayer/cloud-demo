@@ -1,5 +1,6 @@
 package com.cloud.consumer.utils;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class PQuery<T> implements Serializable {
         this.page.setCurrent(page);
     }
 
+    @ApiModelProperty("查询表名，支持模糊搜索")
     public void setTableName(T tableName){
         this.data = tableName;
     }
