@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: '/generator/list',
+        url: '../generate/list',
         datatype: "json",
         colModel: [			
 			{ label: '表名', name: 'tableName', width: 100, key: true },
@@ -19,9 +19,9 @@ $(function () {
         pager: "#jqGridPager",
         jsonReader : {
             root: "page.list",
-            page: "page.currPage",
-            total: "page.totalPage",
-            records: "page.totalCount"
+            page: "page.current",
+            total: "page.page",
+            records: "page.total"
         },
         prmNames : {
             page:"page", 
@@ -54,7 +54,7 @@ var vm = new Vue({
 			if(tableNames == null){
 				return ;
 			}
-            location.href = "/generator/code?tables=" + tableNames.join();
+            location.href = "../generate/code?tables=" + tableNames.join();
 		}
 	}
 });

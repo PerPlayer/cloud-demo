@@ -15,6 +15,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.stream.IntStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -113,8 +114,13 @@ public class Generator {
     }
 
     private static String mergeTemplate(TableEntity tableEntry, String templateName) {
+
+        //设置velocity资源加载器
+        Properties prop = new Properties();
+        prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
+        Velocity.init(prop);
         VelocityContext velocityContext = new VelocityContext(tableEntry);
-        Template template = Velocity.getTemplate("src/main/resources/template/" + templateName, "UTF-8");
+        Template template = Velocity.getTemplate(/*"src/main/resources/"+*/"template/" + templateName, "UTF-8");
         StringWriter writer = new StringWriter();
         template.merge(velocityContext, writer);
         String content = writer.toString();

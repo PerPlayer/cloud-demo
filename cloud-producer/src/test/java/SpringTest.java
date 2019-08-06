@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.util.Map;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = ProducerApplication.class)
 public class SpringTest {
@@ -19,7 +21,8 @@ public class SpringTest {
 
 
         PPage pg = new PPage();
-//        generateService.queryTableList("crawler", pg);
-        generateService.generateCode("crawler_log");
+        PPage<Map> page = generateService.queryTableList("crawler", pg);
+        System.out.println(page);
+//        generateService.generateCode("crawler_log");
     }
 }

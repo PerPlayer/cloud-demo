@@ -25,7 +25,7 @@ public class FeignApiController implements FeignApi {
     @Override
     public String hello(String name) {
         try {
-            ServiceInstance instance = client.getLocalServiceInstance();
+            ServiceInstance instance = null;//client.getLocalServiceInstance();
             int sleepTime = new Random().nextInt(3000);
             logger.info("sleepTime: " + sleepTime);
             Thread.sleep(sleepTime);

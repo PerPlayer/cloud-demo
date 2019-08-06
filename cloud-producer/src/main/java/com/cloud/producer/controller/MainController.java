@@ -22,7 +22,8 @@ public class MainController {
 
     @RequestMapping("/hello")
     public String index(@RequestParam String name){
-        ServiceInstance instance = client.getLocalServiceInstance();
+        ServiceInstance instance = client.getInstances(client.getServices().get(0)).get(0);
+
         logger.info("host: {}, ip: {}", instance.getHost(), instance.getServiceId());
         return "Feign response: " + name;
     }
