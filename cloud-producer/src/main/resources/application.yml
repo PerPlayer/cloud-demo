@@ -6,6 +6,8 @@ spring:
     url: jdbc:mysql://localhost:3306/test?characterEncoding=UTF-8
     username: root
     password: tiger
+  profiles:
+    include: ex
 server:
   port: 8090
   servlet:
@@ -37,3 +39,6 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
   helper-dialect: com.github.pagehelper.dialect.helper.MySqlDialect
+
+producer:
+  packagePath: com.cloud.producer

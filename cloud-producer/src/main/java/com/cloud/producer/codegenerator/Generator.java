@@ -22,9 +22,10 @@ import java.util.zip.ZipOutputStream;
 
 public class Generator {
 
-    private static String packagePath = "com.cloud.producer";
+    private static String packagePath = null;
 
-    public static void generate(Map<String, Object> table, List<Map<String, Object>> columns, ZipOutputStream zip){
+    public static void generate(Map<String, Object> table, List<Map<String, Object>> columns, ZipOutputStream zip, String packagePath){
+        setPackagePath(packagePath);
         List<String> templates = getTemplates();
 
         TableEntity tableEntity = new TableEntity();
@@ -203,4 +204,7 @@ public class Generator {
         return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
+    public static void setPackagePath(String packagePath) {
+        Generator.packagePath = packagePath;
+    }
 }
