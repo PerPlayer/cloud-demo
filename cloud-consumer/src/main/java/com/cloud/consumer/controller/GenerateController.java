@@ -8,7 +8,6 @@ import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +23,7 @@ public class GenerateController {
     private GenerateService service;
 
     @ApiOperation(value = "list", notes = "查询表详情")
-    @PostMapping("list")
+    @GetMapping("list")
     public B list(PQuery<String> pQuery) {
         B b = service.list(pQuery);
         return b;
