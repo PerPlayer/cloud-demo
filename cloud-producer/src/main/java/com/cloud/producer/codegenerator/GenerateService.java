@@ -1,6 +1,6 @@
 package com.cloud.producer.codegenerator;
 
-import com.cloud.producer.dao.TableDao;
+import com.cloud.producer.codegenerator.dao.TableDao;
 import com.cloud.producer.properties.ProducerProperties;
 import com.cloud.producer.utils.PPage;
 import com.github.pagehelper.Page;
@@ -20,6 +20,7 @@ import java.util.zip.ZipOutputStream;
 @EnableConfigurationProperties(ProducerProperties.class)
 public class GenerateService {
 
+    @Autowired
     private ProducerProperties producerProperties;
 
     @Autowired

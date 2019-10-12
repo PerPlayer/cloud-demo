@@ -22,7 +22,7 @@ public class MapperScannerConfiguierConfig {
     public MapperScannerConfigurer mapperScannerConfigurer() {
         MapperScannerConfigurer configurer = new MapperScannerConfigurer();
         configurer.setSqlSessionFactoryBeanName("SqlSessionFactoryBean");
-        configurer.setBasePackage("com.cloud.producer.dao");
+        configurer.setBasePackage("com.cloud.producer.codegenerator.dao");
         return configurer;
     }
 }

@@ -1,4 +1,4 @@
-package com.cloud.producer.dao;
+package com.cloud.producer.codegenerator.dao;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
