@@ -37,3 +37,6 @@ pagehelper:
   supportMethodsArguments: true
   params: count=countSql
   helper-dialect: com.github.pagehelper.dialect.helper.MySqlDialect
+
+producer:
+  packagePath: com.cloud.producer
