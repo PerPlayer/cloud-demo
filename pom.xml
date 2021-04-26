@@ -31,7 +31,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<!--<tomcat.version>8</tomcat.version>-->
 		<boot.version>2.0.1.RELEASE</boot.version>
-		<commons.io.version>2.5</commons.io.version>
+		<commons.io.version>2.7</commons.io.version>
 	</properties>
 
 	<dependencyManagement>
